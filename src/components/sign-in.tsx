@@ -1,5 +1,8 @@
-import { Button, Link, TextField } from '@mui/material'
+import { Button, Checkbox, Link, TextField } from '@mui/material'
 import { LoginState } from '../types'
+import { DatePicker } from '@mui/x-date-pickers'
+import { useState } from 'react'
+import dayjs from 'dayjs'
 
 interface ISignInProps {
   loginState: LoginState
@@ -7,13 +10,21 @@ interface ISignInProps {
 }
 
 export default function SignIn(props: ISignInProps) {
+  const [dob, setDob] = useState<dayjs.Dayjs | null>(null)
+
   return (
-    <div className="rounded-2xl shadow-lg p-12 bg-gray-100 w-[min(400px,100vw)] gap-4 flex-col flex flex-center">
+    <div className="rounded-2xl shadow-lg p-10 bg-gray-100 w-[min(400px,100vw)] gap-4 flex-col flex flex-center">
       <h1 className="text-3xl">
         {props.loginState === 'login' ? 'Sign in' : 'Register'}
       </h1>
-      <TextField id="outlined-basic" label="Email" variant="outlined" />
       <TextField
+        required
+        id="outlined-basic"
+        label="Email"
+        variant="outlined"
+      />
+      <TextField
+        required
         id="outlined-basic"
         label="Password"
         variant="outlined"
@@ -21,11 +32,28 @@ export default function SignIn(props: ISignInProps) {
       />
       {props.loginState === 'register' && (
         <TextField
+          required
           id="outlined-basic"
           label="Repeat password"
           variant="outlined"
           type="password"
         />
+      )}
+      {props.loginState === 'register' && (
+        <>
+          <br />
+          <TextField
+            required
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+          />
+          <DatePicker
+            value={dob}
+            onChange={(newValue) => setDob(newValue)}
+            label="Date of birth"
+          />
+        </>
       )}
       <Button variant="contained">
         {props.loginState === 'login' ? 'Log in' : 'Register'}
