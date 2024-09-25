@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import SignIn from './components/sign-in'
+import { LoginState } from './types'
 
 function App() {
+  const [signInState, setSignInState] = useState<LoginState>('login')
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main className="h-svh w-full flex items-center justify-center font-lato ">
+        <SignIn setLoginState={setSignInState} loginState={signInState} />
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
