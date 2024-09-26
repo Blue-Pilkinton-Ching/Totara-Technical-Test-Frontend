@@ -13,10 +13,16 @@ export async function getRegistration(token: string) {
 }
 
 export async function addRegistration(regi: IRegistration, token: string) {
+  //prints expected result
+  console.log(JSON.stringify(regi))
+
   return await fetch(`http://localhost:3002/api/registration`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
+
+    body: JSON.stringify(regi),
   })
 }

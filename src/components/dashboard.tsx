@@ -37,19 +37,18 @@ export default function Dashboard(props: IDashboardProps) {
   async function addRegistrationLocal(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
+    console.log(event)
+
     const target = event.target as typeof event.target & {
-      first_name: { value: string }
-      last_name: { value: string }
-      food: { value: string }
+      0: HTMLInputElement
+      2: HTMLInputElement
+      4: HTMLInputElement
     }
-
     const registration = {
-      first_name: target.first_name.value,
-      last_name: target.last_name.value,
-      food: target.food.value,
+      first_name: target[0].value,
+      last_name: target[2].value,
+      food: target[4].value,
     } as IRegistration
-
-    console.log(registration)
 
     const token = await getAccessTokenSilently({
       authorizationParams: {
