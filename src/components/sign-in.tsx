@@ -13,7 +13,7 @@ export default function SignIn(props: ISignInProps) {
   const [dob, setDob] = useState<dayjs.Dayjs | null>(null)
 
   return (
-    <div className="rounded-2xl shadow-lg p-10 bg-gray-100 w-[min(400px,100vw)] gap-4 flex-col flex flex-center">
+    <>
       <h1 className="text-3xl">
         {props.loginState === 'login' ? 'Sign in' : 'Register'}
       </h1>
@@ -75,6 +75,6 @@ export default function SignIn(props: ISignInProps) {
           {props.loginState === 'login' ? `Register ` : `Sign in `}
         </Link>
       </h2>
-    </div>
+    </>
   )
 }
