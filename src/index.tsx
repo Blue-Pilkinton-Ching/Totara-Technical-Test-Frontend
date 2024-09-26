@@ -1,14 +1,28 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App'
+import Login from './components/login'
 import reportWebVitals from './reportWebVitals'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import 'dayjs/locale/en-nz'
 import { Auth0Provider } from '@auth0/auth0-react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Dashboard from './components/dashboard'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Login />,
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
+  },
+])
+
 root.render(
   <React.StrictMode>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -16,10 +30,10 @@ root.render(
         domain="dev-6k5h6ojs067v2f8l.au.auth0.com"
         clientId="zz45ahIjv4o1pAUd94n1QR5dgpKn8NW7"
         authorizationParams={{
-          redirect_uri: `http://localhost:3000`,
+          redirect_uri: `http://localhost:3000/dashboard`,
         }}
       >
-        <App />
+        <RouterProvider router={router} />
       </Auth0Provider>
     </LocalizationProvider>
   </React.StrictMode>

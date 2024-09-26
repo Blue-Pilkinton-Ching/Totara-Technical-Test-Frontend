@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Button, CircularProgress } from '@mui/material'
-import Dashboard from './components/dashboard'
+import Dashboard from './dashboard'
 
-function App() {
+function Login() {
   const { isAuthenticated, isLoading, loginWithRedirect, error } = useAuth0()
 
   return (
@@ -40,4 +40,4 @@ function App() {
   )
 }
 
-export default App
+export default Login
