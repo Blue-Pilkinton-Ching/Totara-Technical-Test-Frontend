@@ -30,6 +30,7 @@ root.render(
         domain="dev-6k5h6ojs067v2f8l.au.auth0.com"
         clientId="zz45ahIjv4o1pAUd94n1QR5dgpKn8NW7"
         authorizationParams={{
+          audience: 'https://totara-test.com/',
           redirect_uri: `http://localhost:3000/dashboard`,
         }}
       >

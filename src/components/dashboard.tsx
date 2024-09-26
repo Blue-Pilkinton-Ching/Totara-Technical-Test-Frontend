@@ -1,13 +1,32 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Button, CircularProgress } from '@mui/material'
+import { useEffect } from 'react'
+import getRegistration from '../api'
 
 export interface IDashboardProps {}
 
 export default function Dashboard(props: IDashboardProps) {
-  const { user, logout, isAuthenticated, isLoading } = useAuth0()
+  const { user, logout, isAuthenticated, isLoading, getAccessTokenSilently } =
+    useAuth0()
 
   if (!isLoading && !isAuthenticated) {
     window.location.href = '/'
+  }
+
+  useEffect(() => {
+    getRegistrationLocal()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  async function getRegistrationLocal() {
+    const token = await getAccessTokenSilently({
+      authorizationParams: {
+        audience: 'https://totara-test.com/',
+      },
+    })
+    console.log('Token:', token)
+    const regi = await getRegistration(token)
+    console.log(regi)
   }
 
   return (
@@ -17,7 +36,7 @@ export default function Dashboard(props: IDashboardProps) {
           <CircularProgress />
         </div>
       ) : (
-        <div className="w-full h-full">
+        <div className="w-full h-full bg-gray-100">
           <div className="w-full flex flex-row items-center gap-5 p-3 justify-between">
             <div className="flex flex-row gap-5 items-center flex-1 min-w-0">
               <img
