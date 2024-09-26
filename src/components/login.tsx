@@ -1,18 +1,19 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Button, CircularProgress } from '@mui/material'
-import Dashboard from './dashboard'
 
 function Login() {
   const { isAuthenticated, isLoading, loginWithRedirect, error } = useAuth0()
+
+  if (isAuthenticated) {
+    window.location.href = '/dashboard'
+  }
 
   return (
     <>
       <div className="App">
         <main className="h-svh w-full flex items-center justify-center font-lato ">
-          {isLoading ? (
+          {isLoading || isAuthenticated ? (
             <CircularProgress className="mx-auto" />
-          ) : isAuthenticated ? (
-            <Dashboard />
           ) : error ? (
             <>
               <h1 className="text-3xl">An Error occurred!</h1>
