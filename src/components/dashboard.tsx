@@ -8,7 +8,7 @@ import { IRegistration } from '../schema'
 export interface IDashboardProps {}
 
 export default function Dashboard(props: IDashboardProps) {
-  const [register, setRegister] = useState(null)
+  const [register, setRegister] = useState<IRegistration | null>(null)
   const [loading, setIsLoading] = useState(true)
   const { user, logout, isAuthenticated, isLoading, getAccessTokenSilently } =
     useAuth0()
@@ -92,9 +92,18 @@ export default function Dashboard(props: IDashboardProps) {
           </div>
           <div className="w-full flex-1 flex items-center justify-center">
             {register ? (
-              <>
+              <div>
                 <h1>You have registered</h1>
-              </>
+                <h2>
+                  <strong>First Name:</strong> {register.first_name}
+                </h2>
+                <h2>
+                  <strong>Last Name:</strong> {register.last_name}
+                </h2>
+                <h2>
+                  <strong>Food:</strong> {register.food}
+                </h2>
+              </div>
             ) : (
               <>
                 <Backdrop>
