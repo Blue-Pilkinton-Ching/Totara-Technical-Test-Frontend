@@ -1,5 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Button, CircularProgress } from '@mui/material'
+import Backdrop from './backdrop'
 
 function Login() {
   const { isAuthenticated, isLoading, loginWithRedirect, error } = useAuth0()
@@ -21,7 +22,7 @@ function Login() {
             </>
           ) : (
             <>
-              <div className="rounded-2xl shadow-lg p-7 sm:p-10 bg-gray-100 w-[min(400px,100vw)] gap-4 flex-col flex flex-center">
+              <Backdrop>
                 <h1 className="text-3xl">You're Logged Out!</h1>
                 <br />
                 <Button
@@ -32,7 +33,7 @@ function Login() {
                 >
                   Log In
                 </Button>
-              </div>
+              </Backdrop>
             </>
           )}
         </main>
